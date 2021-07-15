@@ -1,0 +1,13 @@
+<h3>{{ title }}</h3>
+<a >{{ body }}</a>
+{% for comment in comments %}
+<h3>{{ comment.body }}</h3>
+{% endfor %}
+<script type="text/javascript"></script>
+var test = window.location.href;
+</script>
+<form method="POST" action='/nd_withcomments'>
+    {% csrf_token %}
+    </br>comment</br><input type="string" name="comment"></br>
+        <input type="submit" value="submit">
+    </form>

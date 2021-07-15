@@ -1,0 +1,38 @@
+<h3>{{ title }}</h3>
+<a >{{ body }}</a>
+<p id="permission">无权限编辑</p>
+<script>
+    if ({{ condition }} ==1) {
+      document.getElementById("permission").innerHTML = "可编辑";
+    }
+</script>
+<form method="POST" action=''>
+    {% csrf_token %}
+    </br>更新议题内容</br><input type="string" name="new_body"></br>
+    <input type="submit" value="update">
+    </form>
+{% for comment in comments %}
+<h3>{{ comment.body }}</h3>
+{% endfor %}
+<form method="POST" action=''>
+    {% csrf_token %}
+    </br>comment</br><input type="string" name="comment"></br>
+    <input type="submit" value="submit">
+    </form>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>

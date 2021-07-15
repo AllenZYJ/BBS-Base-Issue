@@ -1,0 +1,39 @@
+<a href="/register"><p>注册</p></a>
+<a href="/login"><p>登录</p></a>
+<a href="/logout/">注销</a>
+
+<h1>欢迎回来：{{ user_id }}</h1>
+{% for data_item in data %}
+
+<a href="/details/{{ data_item.number }}">{{ data_item.title }}</a></br>
+
+<div class="product">
+<a>{{ data_item.body}}</a></div>
+{% endfor %}
+</div>
+
+<h2>发起新的议题</h2>
+
+<form method="POST" action='/new_discuss'>
+    {% csrf_token %}
+    </br>title</br><input type="string" name="title"></br>
+    </br>body</br><input type="string" name="body">
+        <input type="submit" value="submit">
+    </form>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
